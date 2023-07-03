@@ -7,6 +7,7 @@ import Id from "../../../@shared/domain/value-object/id.value-object";
 type InvoiceProps = {
     id?: Id;
     name: string;
+    document: string;
     address: Address;
     items: Product[];
     createdAt?: Date;
@@ -15,12 +16,14 @@ type InvoiceProps = {
 
 export default class Invoice extends BaseEntity implements AggregateRoot {
     _name: string
+    _document: string
     _address: Address
     _items: Product[]
 
     constructor(props: InvoiceProps) {
         super(props.id, props.createdAt, props.updatedAt);
         this._name = props.name;
+        this._document = props.document;
         this._address = props.address;
         this._items = props.items;
     }
@@ -29,11 +32,19 @@ export default class Invoice extends BaseEntity implements AggregateRoot {
         return this._name;
     }
 
+    get document(): string {
+        return this._document;
+    }
+
     get address(): Address {
         return this._address;
     }
 
     get items(): Product[] {
         return this._items;
+    }
+
+    get total(): number {
+        return this._items.reduce((acc, item) => acc + item.price, 0);
     }
 }

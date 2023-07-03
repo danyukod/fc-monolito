@@ -2,15 +2,15 @@ import ValueObject from "../../../@shared/domain/value-object/value-object.inter
 
 type AddressProps = {
     street: string;
-    number: number;
+    number: string;
     complement: string;
     city: string;
     state: string;
     zipCode: string;
-}
+};
 export default class Address implements ValueObject {
     private _street: string;
-    private _number: number;
+    private _number: string;
     private _complement: string;
     private _city: string;
     private _state: string;
@@ -29,7 +29,7 @@ export default class Address implements ValueObject {
         return this._street;
     }
 
-    get number(): number {
+    get number(): string {
         return this._number;
     }
 
