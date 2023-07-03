@@ -1,6 +1,6 @@
 import Invoice from "../domain/entity/invoice.entity";
 
 export default interface InvoiceGateway {
-    add(invoice: Invoice): Promise<void>;
+    save(invoice: Invoice): Promise<Invoice>;
     find(id: string): Promise<Invoice>;
 }
