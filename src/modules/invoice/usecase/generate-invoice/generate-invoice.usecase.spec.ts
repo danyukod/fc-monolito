@@ -14,6 +14,7 @@ describe("Generate Invoice Usecase unit test", () => {
         const usecase = new GenerateInvoiceUseCase(repository);
 
         const input = {
+            id: "1",
             name: "Client 1",
             document: "123456789",
             street: "Street 1",

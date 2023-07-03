@@ -33,6 +33,7 @@ export default class GenerateInvoiceUseCase {
         });
 
         const invoiceProps = {
+            id: new Id(input.id),
             name: input.name,
             document: input.document,
             address: address,
