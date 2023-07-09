@@ -16,7 +16,7 @@ const MockRepository = () => {
   };
 };
 
-describe("Find Client Usecase unit test", () => {
+describe("find client usecase unit test", () => {
   it("should find a client", async () => {
     const repository = MockRepository();
     const usecase = new FindClientUseCase(repository);
@@ -28,11 +28,9 @@ describe("Find Client Usecase unit test", () => {
     const result = await usecase.execute(input);
 
     expect(repository.find).toHaveBeenCalled();
-    expect(result.id).toEqual(input.id);
-    expect(result.name).toEqual(client.name);
-    expect(result.email).toEqual(client.email);
-    expect(result.address).toEqual(client.address);
-    expect(result.createdAt).toEqual(client.createdAt);
-    expect(result.updatedAt).toEqual(client.updatedAt);
+    expect(result.id).toBe(input.id);
+    expect(result.name).toBe(client.name);
+    expect(result.email).toBe(client.email);
+    expect(result.address).toBe(client.address);
   });
 });

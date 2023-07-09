@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
+
 import ClientAdmFacadeFactory from "../factory/client-adm.facade.factory";
 import { ClientModel } from "../repository/client.model";
 import ClientRepository from "../repository/client.repository";
@@ -26,12 +27,8 @@ describe("ClientAdmFacade test", () => {
   });
 
   it("should create a client", async () => {
-    const repository = new ClientRepository();
-    const addUsecase = new AddClientUseCase(repository);
-    const facade = new ClientAdmFacade({
-      addUsecase: addUsecase,
-      findUsecase: undefined,
-    });
+
+    const facade = ClientAdmFacadeFactory.create();
 
     const input = {
       id: "1",
@@ -45,20 +42,12 @@ describe("ClientAdmFacade test", () => {
     const client = await ClientModel.findOne({ where: { id: "1" } });
 
     expect(client).toBeDefined();
-    expect(client.name).toBe(input.name);
-    expect(client.email).toBe(input.email);
-    expect(client.address).toBe(input.address);
+    expect(client!.name).toBe(input.name);
+    expect(client!.email).toBe(input.email);
+    expect(client!.address).toBe(input.address);
   });
 
-  it("should find a client", async () => {
-    // const repository = new ClientRepository();
-    // const findUsecase = new FindClientUseCase(repository);
-    // const addUsecase = new AddClientUseCase(repository);
-    // const facade = new ClientAdmFacade({
-    //   addUsecase: addUsecase,
-    //   findUsecase: findUsecase,
-    // });
-
+  it("it should find a client", async () => {
     const facade = ClientAdmFacadeFactory.create();
 
     const input = {
@@ -73,9 +62,9 @@ describe("ClientAdmFacade test", () => {
     const client = await facade.find({ id: "1" });
 
     expect(client).toBeDefined();
-    expect(client.id).toBe(input.id);
-    expect(client.name).toBe(input.name);
-    expect(client.email).toBe(input.email);
-    expect(client.address).toBe(input.address);
+    expect(client!.id).toBe(input.id);
+    expect(client!.name).toBe(input.name);
+    expect(client!.email).toBe(input.email);
+    expect(client!.address).toBe(input.address);
   });
 });

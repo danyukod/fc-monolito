@@ -7,12 +7,13 @@ const MockRepository = () => {
   };
 };
 
-describe("Add Client Usecase unit test", () => {
-  it("should add a client", async () => {
-    const repository = MockRepository();
-    const usecase = new AddClientUseCase(repository);
+describe("Add Client usecase unit test", () => {
+  it("should add a Client", async () => {
+    const clientRepository = MockRepository();
+    const usecase = new AddClientUseCase(clientRepository);
 
     const input = {
+      id: "1",
       name: "Client 1",
       email: "x@x.com",
       address: "Address 1",
@@ -20,10 +21,10 @@ describe("Add Client Usecase unit test", () => {
 
     const result = await usecase.execute(input);
 
-    expect(repository.add).toHaveBeenCalled();
-    expect(result.id).toBeDefined();
-    expect(result.name).toEqual(input.name);
-    expect(result.email).toEqual(input.email);
-    expect(result.address).toEqual(input.address);
+    expect(clientRepository.add).toHaveBeenCalled();
+    expect(result.id).toBe(input.id);
+    expect(result.name).toBe(input.name);
+    expect(result.email).toBe(input.email);
+    expect(result.address).toBe(input.address);
   });
 });
